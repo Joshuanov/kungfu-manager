@@ -13,12 +13,23 @@ return new class extends Migration
 {
     Schema::create('plans', function (Blueprint $table) {
         $table->id();
-        $table->string('nombre'); // Básico, Avanzado, etc.
-        $table->decimal('monto_mensual', 10, 2);
+
+        $table->string('nombre');
         $table->integer('duracion_meses');
-        $table->integer('asistencias_semanales');
+
+        $table->decimal('monto_total', 10, 2)->nullable();
+        $table->decimal('monto_base_mensual', 10, 2);
+        $table->integer('pago_inicial')->nullable();
+
+        $table->string('tipo_plan_pago'); // Ej: 'mensual', 'único', etc.
+
+        $table->integer('cant_clases_tradicional')->default(0);
+        $table->integer('cant_clases_sanda')->default(0);
+        $table->integer('cant_clases_extra')->default(0);
+
         $table->timestamps();
     });
 }
+
 
 };
